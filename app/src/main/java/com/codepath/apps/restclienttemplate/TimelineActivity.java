@@ -20,7 +20,7 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        TwitterClient client = TwitterApp.getRestClient(this); // ??? Why can't we get it from TwitterClient instead of TwitterApp?
+        client = TwitterApp.getRestClient(this); // ??? Why can't we get it from TwitterClient instead of TwitterApp?
         populateHomeTimeline();
     }
 
@@ -28,12 +28,12 @@ public class TimelineActivity extends AppCompatActivity {
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.i(TAG, "onSuccess!");
+                Log.i(TAG, "onSuccess!" + json.toString());
             }
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.i(TAG, "onFailure!", throwable);
+                Log.i(TAG, "onFailure! " + response, throwable);
             }
         });
     }
