@@ -87,16 +87,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
             tvTimestamp.setText(tweet.getFormattedTimestamp(tweet));
 
-            // Register click listener on tweet row
-            container.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Navigate to a new activity on tap
-                    Intent i = new Intent(context, DetailActivity.class);
-                    i.putExtra("tweet", Parcels.wrap(tweet));
-                    context.startActivity(i);
-                }
-            });
+
         }
     }
 }
