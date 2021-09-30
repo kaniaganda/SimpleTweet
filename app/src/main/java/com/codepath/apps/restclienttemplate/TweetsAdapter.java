@@ -1,13 +1,18 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -62,6 +67,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     // Define a viewholder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        RelativeLayout container;
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
@@ -80,6 +86,17 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvScreenName.setText(tweet.user.screenName);
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
             tvTimestamp.setText(tweet.getFormattedTimestamp(tweet));
+
+            // Register click listener on tweet row
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Navigate to a new activity on tap
+                    Intent i = new Intent(context, DetailActivity.class);
+                    i.putExtra("tweet", Parcels.wrap(tweet));
+                    context.startActivity(i);
+                }
+            });
         }
     }
 }
