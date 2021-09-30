@@ -23,7 +23,7 @@ import com.github.scribejava.core.builder.api.BaseApi;
  */
 public class TwitterClient extends OAuthBaseClient {
 	public static final BaseApi REST_API_INSTANCE = TwitterApi.instance();
-	public static final String REST_URL = "https://api.twitter.com/1.1"; // ??? How to know to delete URL after 1.1? ApiUrl
+	public static final String REST_URL = "https://api.twitter.com/1.1";
 	public static final String REST_CONSUMER_KEY = BuildConfig.CONSUMER_KEY;
 	public static final String REST_CONSUMER_SECRET = BuildConfig.CONSUMER_SECRET_KEY;
 
@@ -46,11 +46,20 @@ public class TwitterClient extends OAuthBaseClient {
 	// CHANGE THIS
 	// DEFINE METHODS for different API endpoints here
 	public void getHomeTimeline(JsonHttpResponseHandler handler) {
-		String apiUrl = getApiUrl("statuses/home_timeline.json"); // ??? Why are they broken up? REST_URL
+		String apiUrl = getApiUrl("statuses/home_timeline.json");
 		// Can specify query string params directly or through RequestParams.
 		RequestParams params = new RequestParams();
 		params.put("count", 25);
 		params.put("since_id", 1);
+		client.get(apiUrl, params, handler);
+	}
+
+	public void getNextPageOfTweets(JsonHttpResponseHandler handler, long maxId) {
+		String apiUrl = getApiUrl("statuses/home_timeline.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		params.put("max_id", maxId);
 		client.get(apiUrl, params, handler);
 	}
 
