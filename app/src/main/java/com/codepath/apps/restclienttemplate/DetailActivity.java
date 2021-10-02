@@ -29,10 +29,10 @@ public class DetailActivity extends AppCompatActivity {
         tvTimestamp = findViewById(R.id.tvTimestamp);
 
         Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
-        //Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+        Glide.with(this).load(tweet.user.profileImageUrl).into(ivProfileImage);
         tvBody.setText(tweet.getBody());
         tvScreenName.setText(tweet.getUser().screenName);
-        tvTimestamp.setText(tweet.getCreatedAt());
+        tvTimestamp.setText(tweet.getFormattedTimestamp(tweet));
 
     }
 }
