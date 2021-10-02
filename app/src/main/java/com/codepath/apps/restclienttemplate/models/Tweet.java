@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Add for Parceler library
-//@Parcel
+@Parcel
 public class Tweet {
 
     public String body;
@@ -20,7 +20,7 @@ public class Tweet {
     public User user;
 
     // Added as requirement for Parceler library
-    //public Tweet() {}
+    public Tweet() {}
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();

@@ -99,8 +99,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                     Log.i("TweetAdapter", "Clicked");
                     Intent i = new Intent(context, DetailActivity.class);
                     // Use Perceler library to send tweet to DetailActivity; must add to build.gradle and item to wrap
-                    //i.putExtra("tweet", Parcels.wrap(tweet));
-                    i.putExtra("tvBody", Parcels.wrap(tvBody));
+                    i.putExtra("tweet", Parcels.wrap(tweet));
+                    //i.putExtra("tvBody", Parcels.wrap(tvBody));
                     context.startActivity(i);
                 }
             });
